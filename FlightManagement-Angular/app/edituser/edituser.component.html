@@ -1,0 +1,31 @@
+<section class="col-md-3 mx-auto" *ngIf="user != undefined">
+  <h2 class="text-center">Edit User</h2>
+<form #frm="ngForm" (ngSubmit)="editUser()" >
+  <div>User ID</div>
+
+ <div><input type="text" name="sid" [(ngModel)]="user.contactNo" required #modelsid="ngModel" class="form-control" readonly></div>
+  
+  <div>User Name</div>
+  <div><input type="text" name="ename" [(ngModel)]="user.userName" placeholder="user name" required #mlename="ngModel" class="form-control" required></div>
+  <div class="alert alert-danger" *ngIf="mlename.invalid && mlename.touched">User Name is required</div>
+
+
+  <div>Password</div>
+  <div><input type="password" name="dtime" [(ngModel)]="user.password" required #mldtime="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="mldtime.invalid && mltime.touched">Password is required</div>
+
+  <div>Address</div>
+  <div><input type="text" name="min" [(ngModel)]="user.address" placeholder="address" required #mlmin="ngModel" min="60" max="500" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="mlmin.invalid && mlmin.touched">Address is required</div>
+
+  <div>City</div>
+  <div><input type="text" name="fre" [(ngModel)]="user.city" placeholder="city" required #mlfre="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="mlfre.invalid && mlfre.touched">City is required</div>
+
+  
+<div class="mt-2 text-center"><input type="submit" value="Update User" [disabled]="!frm.valid" class="btn btn-danger"/></div>
+</form>
+<footer>
+  <hr/>
+</footer>
+</section>

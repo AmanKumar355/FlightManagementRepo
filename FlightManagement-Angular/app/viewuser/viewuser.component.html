@@ -1,0 +1,45 @@
+<div class="bg2" style="height: 500px;">
+<header *ngIf="user!=null">
+  <h1 class="text-center">{{user.userName}}</h1>
+</header>
+
+<section class="col-md-8 mx-auto p-3 m-3" *ngIf="user!=null" >
+
+ <div class="p-2" style="display: flex;">
+
+ <div><img src="assets/images/{{user.contactNo}}.jpg" height="240" width="250"/>
+  <div class="text-center  m-2"><a class="btn btn-dark btn-xs text-white"
+    routerLink="/upload">Upload Image</a></div> </div>   
+
+ <table class="table table-bordered table-striped col-md-6 mx-auto ">
+   <tr>
+  <th class=" p-2 "><b>User ID</b></th>
+  <td class="  p-2"><b>{{user.contactNo}}</b></td>
+ </tr>
+
+  <tr>
+    <th class=" p-2 "><b>User Name</b></th>
+    <td class="  p-2"><b>{{user.userName}}</b></td>
+  </tr>
+  
+    <tr>
+      <th class="p-2 "><b>Password</b></th>
+      <td class="p-2"><b>{{user.password}}</b></td>
+    </tr>
+      <tr>
+        <th class=" p-2 "><b>Address</b></th>
+        <td class=" p-2"><b>{{user.address}}</b></td>
+      </tr>
+        <tr>
+          <th class=" p-2 "><b>City</b></th>
+          <td class=" p-2"><b>{{user.city}}</b></td>
+        </tr>      
+ </table>
+ <div><a class="btn btn-danger btn-xs text-white"
+  routerLink="/edituser/{{user.contactNo}}">Edit</a></div>
+       
+ </div>
+               
+          </section>
+  
+  </div>

@@ -1,0 +1,56 @@
+<div class="bg3">
+
+<section class="col-md-3 mx-auto" style="max-height: max-content;">
+  <h2 class="text-center">Add Schedule Flight</h2>
+  <div class="alert alert-success" *ngIf="msg !=undefined">{{msg}}</div>
+  <div class="alert alert-danger" *ngIf="errorMsg !=undefined">{{errorMsg}}</div>
+<form #frm="ngForm" (ngSubmit)="addSchedule()" class="table-striped ">
+
+  <div>Available Seats</div>
+  <div><input type="text" name="seat" [(ngModel)]="schedule.seats" required pattern="[0-9]{1,3}" #modelseat="ngModel" placeholder="seat"  class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="modelseat.invalid && modelseat.touched">Seats should be less than 300</div>
+
+
+  <div>Depature Time</div>
+  <div><input type="datetime-local" name="dept" [(ngModel)]="schedule.departureTime" placeholder="Departure Time" required #modeldept="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="modeldept.invalid && modeldept.touched">DepartureTime are required</div>
+
+
+  <div>Minutes</div>
+  <div><input type="number" name="minute" [(ngModel)]="schedule.minutes" placeholder="Minutes" required pattern="[0-9]{1,3}" #modelminute="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="modelminute.invalid && modelminute.touched">Minutes are required</div>
+
+
+  <div>Fare</div>
+  <div><input type="number" name="fre" [(ngModel)]="schedule.fare" placeholder="Fare" required pattern="[0-9]{1,5}" #modelfre="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="modelfre.invalid && modelfre.touched">Fare is required</div>
+
+
+  <div>Flight</div>
+  <div><select [(ngModel)]="schedule.flightCode" name="flight" #modelflight="ngModel" class="form-control">
+        <option value="">----------Select Flight----------</option>
+        <option *ngFor="let flt of flights" value="{{flt.flightCode}}">{{flt.flightName}}</option>
+  </select></div>
+   <div class="alert alert-danger" *ngIf="modelflight.invalid && modelflight.touched">Flight Code is required</div>
+
+
+  <div>From Airport</div>
+  <div><select [(ngModel)] ="schedule.srcAirportCode" name="src" #modelsrc="ngModel" class="form-control">
+    <option value="">----------Select Airport----------</option>
+    <option *ngFor="let arpt of airports" value="{{arpt.airportCode}}">{{arpt.airportLocation}}</option>
+ </select></div>
+  <div class="alert alert-danger" *ngIf="modelsrc.invalid && modelsrc.touched">Source Airport Code is required</div>
+
+
+  <div>To Airport</div>
+  <div><select [(ngModel)]="schedule.destAirportCode" name="dest" #modeldest="ngModel" class="form-control">
+      <option value="">----------Select Airport----------</option>
+      <option *ngFor="let arpt of airports" value="{{arpt.airportCode}}">{{arpt.airportLocation}}</option>
+  </select></div>
+  <div class="alert alert-danger" *ngIf="modeldest.hasDropDownError && modeldest.invalid && modeldest.touched">Destination Airport Code is required</div>
+ 
+
+  <div class="mt-2 text-center"><input type="submit" value="Add Schedule" [disabled]="!frm.valid" class="btn btn-danger"/></div>
+</form>
+</section>
+</div>

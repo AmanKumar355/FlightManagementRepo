@@ -1,0 +1,43 @@
+<div class="bg" style="height: 500px;">
+
+  <section class="col-md-4 mx-auto">
+    <h2 class="text-center text-white m-2 p-2">SignUp</h2>
+    <div class="alert alert-success" *ngIf="msg !=undefiend">{{msg}} goto login page</div>
+    <div class="alert alert-danger" *ngIf="errorMsg !=undefiend">{{errorMsg}}</div>
+    <section class="col-md-8 mx-auto">
+      <form #frm="ngForm" (ngSubmit)="adduser()" novalidate *ngIf="flag">
+        <div class="text-white">User ID</div>
+        <div><input type="number" name="uid" [(ngModel)]="user.contactNo" placeholder="contact number" required
+            #modeluid="ngModel" class="form-control" pattern="[0-9]{10}"></div>
+        <div class="alert alert-danger" *ngIf="modeluid.invalid && (modeluid.touched || modeluid.dirty)">
+          <div *ngIf="modeluid.errors.required">Contact Number is required.</div>
+          <div *ngIf="modeluid.errors.pattern">Contact number must contain 10 digits</div>
+        </div>
+
+        <div class="text-white">User Name</div>
+        <div><input type="text" name="uname" [(ngModel)]="user.userName" placeholder="user name" required
+            #mluname="ngModel" class="form-control"></div>
+        <div class="alert alert-danger" *ngIf="mluname.invalid && mluname.touched">User Name is required</div>
+
+        <div class="text-white">Password</div>
+        <div><input type="text" name="pwd" [(ngModel)]="user.password" placeholder="password" required #mlpwd="ngModel"
+            class="form-control"></div>
+        <div class="alert alert-danger" *ngIf="mlpwd.invalid && mlpwd.touched">Password is required</div>
+
+        <div class="text-white">Address</div>
+        <div><input type="text" name="address" [(ngModel)]="user.address" placeholder="address" required
+            #mlads="ngModel" class="form-control" /></div>
+        <div class="alert alert-danger" *ngIf="mlads.invalid && mlads.touched">Address is required</div>
+
+        <div class="text-white">City</div>
+        <div><input type="text" name="city" [(ngModel)]="user.city" placeholder="city" required #mlcity="ngModel"
+            class="form-control" /></div>
+        <div class="alert alert-danger" *ngIf="mlcity.invalid && mlcity.touched">City is required</div>
+
+
+        <div class="mt-2 text-center"><input type="submit" value="SignUp" [disabled]="!frm.valid"
+            class="btn btn-dark text-black" /></div>
+      </form>
+    </section>
+  </section>
+</div>

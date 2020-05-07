@@ -1,0 +1,71 @@
+<div style="background-color: wheat;">
+<section class="col-md-4 mx-auto" *ngIf="schedule != undefined">
+  <h2 class="text-center">Edit Scheduled Flight</h2>
+  <div class="alert alert-success" *ngIf="msg !=undefined">{{msg}}</div>
+  <div class="alert alert-danger" *ngIf="errorMsg !=undefined">{{errorMsg}}</div>
+<form #frm="ngForm" (ngSubmit)="editSheduledFlight()" >
+  <div>Scheduled Flight ID</div>
+
+ <div><input type="number" name="sid" [(ngModel)]="schedule.scheduledFlightId" required #modelsid="ngModel" class="form-control" readonly></div>
+  
+  <div>Available Seats</div>
+  <div><input type="number" name="ename" [(ngModel)]="schedule.availableSeats" required #mlename="ngModel" class="form-control" required maxlength="3"></div>
+  <div class="alert alert-danger" *ngIf="mlename.invalid && mlename.touched">Available seats are required</div>
+
+  
+
+  <div>Departure Time</div>
+  <div><input type="datetime-local" name="dtime" [(ngModel)]="schedule.departureTime" required #mldtime="ngModel" class="form-control"></div>
+  <!-- <div class="alert alert-danger" *ngIf="mldtime.invalid && mltime.touched">Departure Time is required</div> -->
+
+  <div>Minutes</div>
+  <div><input type="number" name="min" [(ngModel)]="schedule.minutes" required #mlmin="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="mlmin.invalid && mlmin.touched">Minutes is required</div>
+
+  <div>Scheduled Status</div>
+  <div><select type="text" [(ngModel)]="schedule.scheduleStatus" name="status" #mlstatus="ngModel" class="form-control" required>
+    <option>Departed</option>   
+   <option>Estimated Time</option>
+   <option>Delay</option>
+ </select></div>
+
+  <!-- <div><input type="text" name="status" [(ngModel)]="schedule.scheduleStatus" required #mlstatus="ngModel" class="form-control"></div> -->
+  <div class="alert alert-danger" *ngIf="mlstatus.invalid && mlstatus.touched">Schedule status is required</div>
+
+  <div>Fare</div>
+  <div><input type="number" name="fre" [(ngModel)]="schedule.fare" required #mlfre="ngModel" class="form-control"></div>
+  <div class="alert alert-danger" *ngIf="mlfre.invalid && mlfre.touched">Fare is required</div>
+
+  <div>From Airport</div>
+  <div><select [(ngModel)]="schedule.sourceAirport.airportCode" name="src" #mlsrc="ngModel" required class="form-control">
+    <option value="">----------select Source Airport----------</option>
+    <option *ngFor="let airpts of airports" value="{{airpts.airportCode}}">{{airpts.airportLocation}}</option>
+  </select></div>
+  <!-- <div><input type="text" name="src" [(ngModel)]="schedule.sourceAirport.airportCode" required #mlsrc="ngModel" class="form-control"></div> -->
+  <div class="alert alert-danger" *ngIf="mlsrc.invalid && mlsrc.touched">Source Airport is required</div>
+
+  <div>To Airport</div>
+  <div><select [(ngModel)]="schedule.destinationAirport.airportCode" name="dest" #mldest="ngModel" required class="form-control">
+      <option value="">---------Select Destination airport----------</option>
+      <option *ngFor="let airpt of airports" value="{{airpt.airportCode}}">{{airpt.airportLocation}}</option>
+  </select></div>
+  <!-- <div><input type="text" name="dest" [(ngModel)]="schedule.destinationAirport.airportCode" required #mldest="ngModel" class="form-control"></div> -->
+  <div class="alert alert-danger" *ngIf="mldest.invalid && mldest.touched">Destination Airport is required</div>
+
+  <div>Flight</div>
+  <div><select [(ngModel)]="schedule.flight.flightCode" name="fcode" #mlfcode="ngModel" required class="form-control">
+    <option value="">----------Select Flight Name----------</option>
+    <option *ngFor="let flt of flights" value="{{flt.flightCode}}">{{flt.flightName}}</option>
+  </select></div>
+  
+   <!-- <div><input type="text" name="fcode" [(ngModel)]="schedule.flight.flightCode" required #mlfcode="ngModel" class="form-control"></div> -->
+  <div class="alert alert-danger" *ngIf="mlfcode.invalid && mlfcode.touched">Flight Name is required</div> 
+
+
+<div class="mt-2 text-center"><input type="submit" value="Update Schedule" [disabled]="!frm.valid" class="btn btn-danger"/></div>
+</form>
+<footer>
+  <hr/>
+</footer>
+</section>
+</div>

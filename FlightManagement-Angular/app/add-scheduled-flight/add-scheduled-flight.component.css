@@ -1,0 +1,9 @@
+
+.bg3{
+    background-image: url("/assets/images/flight2.jpg");
+    
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}

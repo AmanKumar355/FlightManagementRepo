@@ -1,0 +1,50 @@
+<header>
+  <h3 class="text-center p-2 m-2">Your Bookings</h3>
+
+</header>
+<section class="col-md-4 mx-auto m-1 p-2">
+  <input class="form-control" type="text" placeholder="Enter Contact Number" name="txtcontact" #tcontact="ngModel"
+    [(ngModel)]="contact" required pattern="[0-9]{10}" />
+  <div class="alert alert-danger" *ngIf="tcontact.invalid && (tcontact.touched || tcontact.dirty)">
+    <div *ngIf="tcontact.errors.required">Contact Number is required.</div>
+    <div *ngIf="tcontact.errors.pattern">Contact number must contain 10 digits</div>
+  </div>
+  <div class="col-md-12 text-center"><a class="btn btn-primary m-2" (click)="viewByContact()">View</a></div>
+</section>
+<section class="alert alert-danger col-md-4 mx-auto m-1" *ngIf="msg!=undefined">{{msg}}</section>
+<section *ngIf="booking.length>=1">
+<table class="table table-striped table-hover col-md-4 mx-auto " *ngIf="booking != null">
+  <tr class="bg-dark">
+    <td class="text-white">Booking ID</td>
+
+    <td class="text-white">Booking Date</td>
+    <td class="text-white">Flight Name</td>
+    <td class="text-white">Source Location</td>
+    <td class="text-white">Destination Location</td>
+    <td class="text-white">Arrival Time</td>
+    <td class="text-white">Departure Time</td>
+    <td class="text-white">Passengers</td>
+    <td class="text-white">Cancel</td>
+    <td class="text-white">Download</td>
+  </tr>
+  <tr *ngFor="let book of booking" class="bg-light">
+    <td>{{book.bookingId}}</td>
+
+    <td>{{book.bookingDate}}</td>
+    <td>{{book.schedule.flight.flightName}}</td>
+
+    <td>{{book.schedule.sourceAirport.airportLocation}}</td>
+
+    <td>{{book.schedule.destinationAirport.airportLocation}}</td>
+    <td>{{book.schedule.arrivalTime}}</td>
+    <td>{{book.schedule.departureTime}}</td>
+
+    <td><a class="btn btn-primary " (click)="goToPassenger(book.bookingId)">Passengers</a></td>
+
+    <td><a class="btn btn-danger text-white" routerLink="/cancelbooking/{{book.bookingId}}">Cancel</a></td>
+    <td><a class="btn btn-primary" (click)="download(book.bookingId)">Download</a></td>
+  </tr>
+
+
+</table>
+</section>

@@ -1,0 +1,62 @@
+<div class="bg4" style="height: 700px;">
+<header>
+  <h3 class="text-center p-1 mt-2">Scheduled Flights</h3>
+</header>
+<section class="col-md-3 mx-auto bg-dark p-3 m-2">
+
+  <form #frm="ngForm" (ngSubmit)="viewScheduledFlight()">
+  <div class="text-white">From</div>
+  <div><select [(ngModel)]="src" name="src" required #srcairport="ngModel" class="form-control">
+        <option value="">----------Select Source Airport Location----------</option>
+        <option *ngFor="let arpt of airports" value="{{arpt.airportCode}}">{{arpt.airportLocation}}</option>
+  </select></div>
+  <div class="alert alert-danger" *ngIf="srcairport.invalid && srcairport.touched">Source Airport is manadatory</div>
+  
+  <div class="text-white">To</div>
+  <div><select [(ngModel)]="dest" name="dest" required #destairport="ngModel" class="form-control">
+    <option value="">----------Select Departure Airport Location----------</option>
+    <option *ngFor="let arpt of airports" value="{{arpt.airportCode}}">{{arpt.airportLocation}}</option>
+</select></div>
+<div class="alert alert-danger" *ngIf="destairport.invalid && destairport.touched">Destination Airport is manadatory</div>
+
+<div class="text-white">Date of Journey</div>
+<div><input type="date" name="txtdate" [(ngModel)]="doj" required #fdoj="ngModel" class="form-control"/></div>
+<div class="alert alert-danger" *ngIf="fdoj.invalid && fdoj.touched">Date  is manadatory</div>
+
+<div class="mt-2 text-center"><input type="submit" value="Search" [disabled]="!frm.valid" class="btn btn-danger"/></div>
+</form>
+</section>
+<section class="alert alert-danger col-md-3 mx-auto m-1" *ngIf="msg!=undefined">
+  {{msg}}
+</section>
+  
+
+  <table class=" table-bordered table-striped table-hover bg-light col-md-8 mx-auto">
+    <tr>
+      <th>Scheduled Flight ID</th>
+      <th>Available Seats</th>
+      <th>Arrival Time</th>
+      <th>Departure Time</th>
+      <th>Minutes</th>
+      <th>Scheduled Flight Status</th>
+      <th>Fare</th>
+      <th>Destination Airport</th>
+      <th>Source Airport</th>
+      <th>Flight</th>
+      <th>Edit</th>
+    </tr>
+    <tr *ngFor="let schf of schedule">
+      <td>{{schf.scheduledFlightId}}</td>
+      <td>{{schf.availableSeats}}</td>
+      <td>{{schf.arrivalTime}}</td>
+      <td>{{schf.departureTime}}</td>
+      <td>{{schf.minutes}}</td>
+      <td>{{schf.scheduleStatus |titlecase}}</td>
+      <td>{{schf.fare | currency:'INR'}}</td>
+      <td>{{schf.destinationAirport.airportName |titlecase}}</td>
+      <td>{{schf.sourceAirport.airportName | titlecase}}</td>
+      <td>{{schf.flight.flightName | titlecase}}</td>
+      <td><a class="btn btn-danger btn-xs text-white" routerLink="/editschedule/{{schf.scheduledFlightId}}">Edit</a></td>
+    </tr>
+  </table>
+</div>

@@ -1,0 +1,9 @@
+<section class="alert alert-danger col-md-3 mx-auto m-1" *ngIf="msg!=undefined">
+    {{msg}}
+  </section>
+  <section class="alert alert-danger col-md-3 mx-auto m-1" *ngIf="errorMsg!=undefined">
+    {{errorMsg}}
+  </section>
+  <div class="text-center p-2 m-2">
+  <a class="btn btn-danger btn-xs text-white " (click)="Goback()">GoBack</a>
+  </div>

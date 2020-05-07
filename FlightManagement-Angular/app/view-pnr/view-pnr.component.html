@@ -1,0 +1,74 @@
+<div style="height:600px;" class="bg4">
+  <header>
+    <h3 class="text-center">PNR Status</h3>
+  </header>
+
+
+  <section class="col-md-3 p-1 m-1 table-bordered mx-auto" *ngIf="book==null">
+    <form #frm="ngForm" (ngSubmit)="viewByPNR()">
+      <div class="p-2 m-2"><input class="form-control" type="text" placeholder="Enter Contact Number" name="txtcontact"
+          #tcontact="ngModel" [(ngModel)]="contact" required pattern="[0-9]{10}" /></div>
+      <div class="alert alert-danger" *ngIf="tcontact.invalid && (tcontact.touched || tcontact.dirty)">
+        <div *ngIf="tcontact.errors.required">Contact Number is required.</div>
+        <div *ngIf="tcontact.errors.pattern">Contact number must contain 10 digits</div>
+      </div>
+
+      <div class="p-2 m-2"><input class="form-control" type="text" placeholder="Enter Booking ID" name="txtid"
+          #bookId="ngModel" [(ngModel)]="bookingId" required /></div>
+      <div class="alert alert-danger" *ngIf="bookId.invalid && bookId.touched">Booking Id Required</div>
+
+      <div class="mt-2 text-center"><input type="submit" value="Check" [disabled]="!frm.valid" class="btn btn-danger" />
+      </div>
+    </form>
+  </section>
+
+  <section class="alert alert-danger col-md-4 mx-auto m-1" *ngIf="msg!=undefined">{{msg}}</section>
+ 
+  <section class="col-md-12" *ngIf="book!=null">
+  <table class="table table-striped table-hover table-bordered bg-info col-md-5 mx-auto  ">
+
+    <tr>
+      <th>No.Of.Seats</th>
+      <td>{{book.noOfSeats}}</td>
+    </tr>
+    <tr>
+      <th>Booking Date</th>
+      <td>{{book.bookingDate}}</td>
+    </tr>
+
+    <tr>
+      <th>Flight Name</th>
+      <td>{{book.schedule.flight.flightName}}</td>
+    </tr>
+
+    <tr>
+      <th>Source Airport Name</th>
+      <td>{{book.schedule.sourceAirport.airportName}}</td>
+    </tr>
+
+
+    <tr>
+      <th>Destination Airport Name</th>
+      <td>{{book.schedule.destinationAirport.airportName}}</td>
+    </tr>
+
+    <tr>
+      <th>Departure time</th>
+      <td>{{book.schedule.departureTime}}</td>
+    </tr>
+    <tr>
+      <th>Arrival time</th>
+      <td>{{book.schedule.arrivalTime}}</td>
+    </tr>
+    <tr>
+      <th>Total Flight time</th>
+      <td>{{book.schedule.minutes}} min</td>
+    </tr>
+    <tr>
+      <th>Schedule status</th>
+      <td>{{book.schedule.scheduleStatus}}</td>
+    </tr>
+  </table>
+  <div class="text-center"><a class="btn btn-danger p-2" (click)="goBack()">Go back</a></div>
+</section>
+</div>

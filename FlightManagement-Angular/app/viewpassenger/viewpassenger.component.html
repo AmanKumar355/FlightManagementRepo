@@ -1,0 +1,21 @@
+
+
+<section class="alert alert-danger col-md-3 mx-auto m-2 p-2 mt-2" *ngIf="msg != undefined">{{msg}}</section>
+<h2 class="text-center p-2 m-2">Passenger Details</h2>
+<table class="table table-hover col-md-6 table-bordered mx-auto p-2 m-2" *ngIf="passengers!=null">
+
+    <tr>
+      <td><b>Passenger Name</b></td>
+      <td><b>Age</b></td>
+      <td><b>Gender</b></td>
+      <td><b>Booking ID</b></td>
+      <td><b>Booking Details</b></td>
+    </tr>
+    <tr *ngFor="let pass of passengers">
+      <td><b>{{pass.passengerName}}</b></td>
+      <td><b>{{pass.age}}</b></td>
+      <td><b>{{pass.gender}}</b></td>
+      <td><b>{{pass.booking.bookingId}}</b></td>
+      <td><a class="btn btn-danger" (click)="goToBooking()">Booking Details</a></td>
+    </tr>
+</table>
